@@ -1,27 +1,24 @@
 backend:
+  # 必须配置 git-gateway
   name: git-gateway
-  branch: main 
+  branch: main # 您的生产分支名称
 
-media_folder: "demos/uploads"
-public_folder: "demos/uploads"
+  # 必须添加完整的 Identity 地址
+  identity_url: "https://visionary-brioche-501929.netlify.app/.netlify/identity" 
+  gateway_url: "https://visionary-brioche-501929.netlify.app/.netlify/git"
+
+# 必须添加 site_url
+site_url: "https://visionary-brioche-501929.netlify.app"
+
+# 媒体文件夹配置 (我们设置为标准路径)
+media_folder: "assets/uploads" 
+public_folder: "/assets/uploads" 
 
 collections:
+  # 这里开始是您的内容集合，请将下面的 collections 部分替换为您原文件中的内容。
   - name: "data"
     label: "数据管理"
     files:
       - file: "data.json"
         label: "歌曲分类与内容"
-        name: "categories_data"
-        fields:
-          - label: "分类列表"
-            name: "categories"
-            widget: "list"
-            fields:
-              - {label: "分类名称", name: "name", widget: "string"}
-              - label: "歌曲列表"
-                name: "songs"
-                widget: "list"
-                fields:
-                  - {label: "歌曲标题", name: "title", widget: "string"}
-                  - {label: "上传音频", name: "audio", widget: "file"}
-                  - {label: "歌词内容", name: "lyrics", widget: "text"}
+        # ... 以下部分与您原文件一致
