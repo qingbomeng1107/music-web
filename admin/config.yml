@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+  branch: main 
+
+media_folder: "demos/uploads"
+public_folder: "demos/uploads"
+
+collections:
+  - name: "data"
+    label: "数据管理"
+    files:
+      - file: "data.json"
+        label: "歌曲分类与内容"
+        name: "categories_data"
+        fields:
+          - label: "分类列表"
+            name: "categories"
+            widget: "list"
+            fields:
+              - {label: "分类名称", name: "name", widget: "string"}
+              - label: "歌曲列表"
+                name: "songs"
+                widget: "list"
+                fields:
+                  - {label: "歌曲标题", name: "title", widget: "string"}
+                  - {label: "上传音频", name: "audio", widget: "file"}
+                  - {label: "歌词内容", name: "lyrics", widget: "text"}
