@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>播放歌曲</title>
+<style>
+body { font-family: sans-serif; background:#f7f7f7; margin:0; padding:20px; }
+.container { max-width:800px; margin:auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.back { display:inline-block; margin-bottom:20px; color:#666; text-decoration:none; font-size:16px; }
+h1 { margin-top:0; font-size:24px; }
+audio { width:100%; margin:20px 0; outline:none; }
+.lyrics-box { background:#fafafa; padding:20px; border-radius:8px; white-space: pre-wrap; line-height:1.8; color:#555; font-size:15px; min-height:150px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="back" id="backLink" href="#">← 返回列表</a>
+  <h1 id="title"></h1>
+  <audio id="player" controls autoplay></audio>
+  <h3>歌词</h3>
+  <div id="lyrics" class="lyrics-box">加载中...</div>
+</div>
+
+<script>
+const p = new URLSearchParams(location.search);
+const catName = p.get("cat");
+const title = p.get("title");
+const audioUrl = p.get("url");
+
+document.getElementById("title").innerText = title;
+document.getElementById("backLink").href = `category.html?name=${encodeURIComponent(catName)}`;
+document.getElementById("player").src = audioUrl;
+
+fetch("data.json?v=" + Date.now())
+  .then(res => res.json())
+  .then(data => {
+    let songs = [];
+    if (data.categories) {
+        const catObj = data.categories.find(c => c.name === catName);
+        songs = catObj ? catObj.songs : [];
+    }
+    const song = songs.find(s => s.title === title);
+    if (song && song.lyrics) {
+        document.getElementById("lyrics").innerText = song.lyrics;
+    } else {
+        document.getElementById("lyrics").innerText = "暂无歌词";
+    }
+  });
+</script>
+</body>
+</html>

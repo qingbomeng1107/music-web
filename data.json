@@ -1,0 +1,11 @@
+{
+  "categories": [
+    { "name": "流行", "songs": [] },
+    { "name": "下沉", "songs": [] },
+    { "name": "国风", "songs": [] },
+    { "name": "榜单", "songs": [] },
+    { "name": "说唱", "songs": [] },
+    { "name": "R&B", "songs": [] },
+    { "name": "对标", "songs": [] }
+  ]
+}
